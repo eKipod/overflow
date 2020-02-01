@@ -14,25 +14,34 @@ namespace overflow.test
         }
 
         [Theory]
-        [InlineData(0, 0)]
-        [InlineData(0.9, 0.9)]
-        [InlineData(1, 1)]
-        [InlineData(1.1, 1)]
-        public void TopGlass(decimal inVolume, decimal expectedVolume)
+        [InlineData(0, 0, 0, 0)]
+        [InlineData(0, 0, 0.9, 0.9)]
+        [InlineData(0, 0, 1, 1)]
+        [InlineData(0, 0, 1.1, 1)]
+
+        public void CalculateVolume(uint row, uint index, decimal inVolume, decimal expectedVolume)
         {
             var calc = new Calculator();
-            var result = calc.GetVolume(row: 0, index: 0, inVolume: inVolume);
+            var result = calc.GetVolume(row: row, index: index, inVolume: inVolume);
             Assert.NotNull(result);
             Assert.Equal(expectedVolume, result.Volume);
         }
 
 
         [Fact]
-        public void NegativeVolumeIsInvalid()
+        public void NegativeVolumeIsError()
         {
             var calc = new Calculator();
-            Assert.Throws<ArgumentOutOfRangeException>(() => calc.GetVolume(0, 0, -1));
+            Assert.Throws<ArgumentOutOfRangeException>("inVolume", () => calc.GetVolume(0, 0, -1));
         }
 
+        [Theory]
+        [InlineData(0, 1)]
+        [InlineData(16, 17)]
+        public void IndexOutOfRangeIsError(uint row, uint index)
+        {
+            var calc = new Calculator();
+            Assert.Throws<ArgumentOutOfRangeException>("index", () => calc.GetVolume(row, index, 0));
+        }
     }
 }
