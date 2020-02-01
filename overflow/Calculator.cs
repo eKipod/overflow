@@ -10,7 +10,7 @@ namespace overflow
 
         public CalculationResult GetVolume(uint row, uint index, decimal inVolume)
         {
-            return new CalculationResult(0);
+            return new CalculationResult(inVolume);
         }
     }
 }

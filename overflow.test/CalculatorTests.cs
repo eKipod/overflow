@@ -12,13 +12,16 @@ namespace overflow.test
             Assert.NotNull(calc);
         }
 
-        [Fact]
-        public void CalculateTopGlass()
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(1, 1)]
+        public void CalculateTopGlass(uint inVolume, uint expectedVolume)
         {
             var calc = new Calculator();
-            var result = calc.GetVolume(row: 0, index: 0, inVolume: 0);
+            var result = calc.GetVolume(row: 0, index: 0, inVolume: inVolume);
             Assert.NotNull(result);
-            Assert.Equal(0, result.Volume);
+            Assert.Equal(expectedVolume, result.Volume);
         }
+
     }
 }
