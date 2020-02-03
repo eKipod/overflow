@@ -2,7 +2,7 @@
   "profiles": {
     "overflow.exe": {
       "commandName": "Project",
-      "commandLineArgs": "-r 3 -i 2 -p 10"
+      "commandLineArgs": "-r 3 -i 2 -p 10 --verbose"
     },
     "Docker": {
       "commandName": "Docker"

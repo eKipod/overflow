@@ -2,6 +2,7 @@
 using CommandLine.Text;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace overflow.exe
 {
@@ -14,7 +15,10 @@ namespace overflow.exe
         public uint Index { get; set; }
 
         [Option('p', "poured", Required = true, HelpText = "Amount poured (in liters) to the top of the glass pyramid.")]
-        public uint Poured { get; set; }
+        public decimal Poured { get; set; }
+
+        [Option('v', "verbose", Required = false, Default = false, HelpText = "Show all the glasses leading to the result.")]
+        public bool Verbose { get; set; }
 
         [Usage]
         public static IEnumerable<Example> Examples { get; } = new[]
@@ -31,9 +35,21 @@ namespace overflow.exe
             Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(o =>
                 {
-                    var calculator = new Calculator();
-                    var result = calculator.GetVolume(o.Row, o.Index, o.Poured);
+                    var result = Calculator.GetVolume(o.Row, o.Index, o.Poured);
+                    if (o.Verbose)
+                    {
+                        foreach(var glass in result.Glasses)
+                        {
+                            if (glass.Index == 0)
+                            {
+                                Console.WriteLine();
+                                Console.Write($"Row {glass.Row}:");
+                            }
 
+                            Console.Write($" [Fill: {glass.Fill} Spill: {glass.Spill}]");
+                        }
+                        Console.WriteLine();
+                    }
                     Console.WriteLine($"{result.Volume} liters");
                 });
         }
