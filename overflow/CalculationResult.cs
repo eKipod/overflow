@@ -5,9 +5,9 @@ namespace overflow
     public class CalculationResult
     {
         public decimal Volume { get; }
-        public IEnumerable<Glass> Glasses { get; }
+        public IEnumerable<IGlass> Glasses { get; }
 
-        public CalculationResult(decimal volume, IEnumerable<Glass> glasses)
+        public CalculationResult(decimal volume, IEnumerable<IGlass> glasses)
         {
             Volume = volume;
             Glasses = glasses;

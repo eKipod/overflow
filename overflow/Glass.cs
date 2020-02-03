@@ -2,7 +2,7 @@
 
 namespace overflow
 {
-    public class Glass
+    internal class Glass : IGlass
     {
         public static decimal Capacity { get; } = 0.25m;
 
