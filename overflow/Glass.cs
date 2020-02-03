@@ -4,17 +4,17 @@ namespace overflow
 {
     internal class Glass
     {
-        public decimal Capacity { get; } = 1;
+        public static decimal Capacity { get; } = 0.25m;
 
         public decimal Fill { get; }
         public decimal Spill { get; }
 
-        public Glass(decimal pour)
+        public Glass(decimal poured)
         {
-            if (pour < 0) throw new ArgumentOutOfRangeException(nameof(pour), pour, "Cannot pour negative volumes");
+            if (poured < 0) throw new ArgumentOutOfRangeException(nameof(poured), poured, "Cannot pour negative volumes");
 
-            Fill = Math.Min(Capacity, pour);
-            Spill = pour - Fill;
+            Fill = Math.Min(Capacity, poured);
+            Spill = poured - Fill;
         }
     }
 }

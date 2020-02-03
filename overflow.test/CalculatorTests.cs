@@ -35,10 +35,14 @@ namespace overflow.test
         [InlineData(3, 3, 10, 0.375)]
         public void CalculateVolume(uint row, uint index, decimal inVolume, decimal expectedVolume)
         {
+            // Calculating for glass capcity of 1 is easier than 0.25, so adjust the numbers:
+            var inVolumeAdjusted = inVolume * Glass.Capacity;
+            var expectedVolumeAdjusted = expectedVolume * Glass.Capacity;
+
             var calc = new Calculator();
-            var result = calc.GetVolume(row: row, index: index, inVolume: inVolume);
+            var result = calc.GetVolume(row: row, index: index, poured: inVolumeAdjusted);
             Assert.NotNull(result);
-            Assert.Equal(expectedVolume, result.Volume);
+            Assert.Equal(expectedVolumeAdjusted, result.Volume);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("overflow.test")]
 
 namespace overflow
 {
@@ -9,9 +10,9 @@ namespace overflow
         {
         }
 
-        public CalculationResult GetVolume(uint row, uint index, decimal inVolume)
+        public CalculationResult GetVolume(uint row, uint index, decimal poured)
         {
-            if (inVolume < 0) throw new ArgumentOutOfRangeException(nameof(inVolume), inVolume, "Value cannot be negative");
+            if (poured < 0) throw new ArgumentOutOfRangeException(nameof(poured), poured, "Value cannot be negative");
             if (index > row) throw new ArgumentOutOfRangeException(nameof(index), index, $"Row {row} only has {row + 1} glasses");
 
             var rows = row + 1;
@@ -26,7 +27,7 @@ namespace overflow
                 {
                     if (r == 0 && i == 0)
                     {
-                        currentRow[i] = new Glass(inVolume);
+                        currentRow[i] = new Glass(poured);
                     }
                     else
                     {
