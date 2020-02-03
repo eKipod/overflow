@@ -19,6 +19,20 @@ namespace overflow.test
         [InlineData(0, 0, 1, 1)]
         [InlineData(0, 0, 1.1, 1)]
 
+        [InlineData(1, 0, 1, 0)]
+        [InlineData(1, 1, 1, 0)]
+        [InlineData(1, 0, 2, 0.5)]
+        [InlineData(1, 1, 2, 0.5)]
+
+        [InlineData(3, 0, 7, 0)]
+        [InlineData(3, 1, 7, 0.5)]
+        [InlineData(3, 2, 7, 0.5)]
+        [InlineData(3, 3, 7, 0)]
+
+        [InlineData(3, 0, 10, 0.375)]
+        [InlineData(3, 1, 10, 1)]
+        [InlineData(3, 2, 10, 1)]
+        [InlineData(3, 3, 10, 0.375)]
         public void CalculateVolume(uint row, uint index, decimal inVolume, decimal expectedVolume)
         {
             var calc = new Calculator();
