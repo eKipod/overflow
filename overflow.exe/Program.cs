@@ -34,7 +34,10 @@ namespace overflow.exe
             Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(o =>
                 {
-                    var result = Calculator.GetVolume(o.Row, o.Index, o.Poured);
+                    var glassFactory = new FixedCapacityGlassFactory(0.25m);
+                    var calculator = new Calculator(glassFactory);
+                    
+                    var result = calculator.GetVolume(o.Row, o.Index, o.Poured);
                     if (o.Verbose)
                     {
                         foreach(var glass in result.Glasses)
