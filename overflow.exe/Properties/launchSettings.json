@@ -3,6 +3,9 @@
     "overflow.exe": {
       "commandName": "Project",
       "commandLineArgs": "-r 3 -i 2 -p 10"
+    },
+    "Docker": {
+      "commandName": "Docker"
     }
   }
 }
